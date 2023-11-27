@@ -1,0 +1,83 @@
+{% extends "sidebar/sidebar.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block title_1 %}
+<i class='bx bxs-home icon'></i>
+<span class="text nav-text p-1">Home</span>
+{% endblock %}
+{% block content %}
+
+<div class="container p-5 bg-container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="cards">
+                <i class='bx bx-pie-chart-alt icon-card'></i>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="titulo-card">Total de clientes</h4>
+                    <div class="circle-container">
+                        <div class="circle" style="transform: rotate('{{clientes}}'turn);">
+                            <span class="percentage">{{clientes}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-enlace">
+                    <a href="{% url 'clientes' %}" class="no-underline">Ver mas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cards">
+                <i class='bx bx-pie-chart-alt icon-card'></i>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="titulo-card">Clientes con deudas</h4>
+                    <div class="circle-container">
+                        <div class="circle" style="transform: rotate('{{clientes}}'turn);">
+                            <span class="percentage">{{deudores}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-enlace">
+                    <a href="{% url 'clientes' %}" class="no-underline">Ver mas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="cards">
+                <i class='bx bx-pie-chart-alt icon-card'></i>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="titulo-card">Clientes al dia</h4>
+                    <div class="circle-container">
+                        <div class="circle">
+                            <span class="percentage">{{alDia}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-enlace">
+                    <a href="{% url 'clientes' %}" class="no-underline">Ver mas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="cards-map">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Mapa Leaflet -->
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="{% static 'js/home.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/Home.css' %}">
+
+</body>
+
+</html>
+{% endblock %}

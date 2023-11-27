@@ -1,0 +1,263 @@
+{% extends "sidebar/sidebar.html" %}
+{% load static %}
+{% block title %}Clientes{% endblock %}
+{% block title_1 %}
+<i class='bx bxs-user check icon'></i>
+<span class="text nav-text p-1">Clientes</span>
+{% endblock %}
+{% block content %}
+<div class="container p-5 bg-container container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--boton nuevo-->
+            <button id="btnNuevo" type="button" class="btn btn-outline-success my-3">Nuevo</button>
+            <!--boton generar deuda-->
+            <button id="btnGenerarDeuda" type="button" class="btn btn-outline-warning my-3" data-bs-toggle="modal"
+                data-bs-target="#deudaModal">Generar Deuda</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="deudaModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Generar deuda</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="form-generar">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="{{ form_deuda.mes_deuda.id_for_label }}">Mes de Deuda:</label>
+                            {{ form_deuda.mes_deuda }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form_deuda.año_deuda.id_for_label }}">Año de Deuda:</label>
+                            {{ form_deuda.año_deuda }}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="generarDeuda">Generar deuda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table id="Clientes" class="table table-bordered table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Cod.Cliente</th>
+                                <th>DNI</th>
+                                <th>Apellido</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaClientes">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal con informacion-->
+<div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Información del Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Cod.Cliente:</strong> <span id="id-i"></span></p>
+                        <p><strong>DNI:</strong> <span id="dni-i"></span></p>
+                        <p><strong>Nombre:</strong> <span id="nombre-i"></span></p>
+                        <p><strong>Apellido:</strong> <span id="apellido-i"></span></p>
+                        <p><strong>Dirección:</strong> <span id="direccion-i"></span></p>
+                        <p><strong>Tipo de servicio:</strong> <span id="servicio-i"></span></p>
+                        <p><strong>Monto:</strong> <span id="monto-i"></span></p>
+                        <p><strong>Zona:</strong> <span id="zona-i"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Teléfono:</strong> <span id="telefono-i"></span></p>
+                        <p><strong>Router:</strong> <span id="router-i"></span></p>
+                        <p><strong>N° de serie:</strong> <span id="numero-serie-i"></span></p>
+                        <p><strong>Estado:</strong><input type="hidden" id="estado-letra" value=""> <span
+                                id="estado-i"><i class=""></i></span></p>
+                        <p><strong>Observaciones:</strong> <span id="observaciones-i"></span></p>
+                        <p><strong>Fecha de Alta:</strong> <span id="fechaAlta-i"></span></p>
+                        <p><strong>Deuda:</strong></p><span id="deuda-i"></span> <!-- Agregado: Mostrar deuda -->
+                    </div>
+                </div>
+                <button type="button" id="btnEditar" class="btn btn-primary">Editar</button>
+                <!-- Boton baja logica -->
+                <button type="button" id="btnBaja" class="btn btn-danger">Baja</button>
+                <!-- Boton suspender -->
+                <button type="button" id="btnSuspender" class="btn btn-warning">Suspender</button>
+                <!-- Boton para ir a los pagos -->
+                <button type="button" id="btnInfoPagos" class="btn btn-success">Pagos</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edicion"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formClientes" method="post">
+                <div class="modal-body">
+                    <div class="form-group" id="form-edcion">
+                        {% include 'form.html' %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Modal para edicion-->
+<div class="modal fade" id="modal-edicion-crud" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo-edicion"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formEdicion" method="post">
+                <div class="modal-body">
+                    <div class="form-group" id="form-edicion">
+                        {% include 'form.html' %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalPago" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="tituloPago">Registrar pago</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Meses adeudados:</strong><span id="meses-deuda"></span></p>
+                <form id="form-pago">
+                    <div class="mb-3">
+                        <label for=",es" class="col-form-label">Mes:</label>
+                        <select class="form-control" id="mes" name="mes">
+                            <option value="Enero">Enero</option>
+                            <option value="Febrero">Febrero</option>
+                            <option value="Marzo">Marzo</option>
+                            <option value="Abril">Abril</option>
+                            <option value="Mayo">Mayo</option>
+                            <option value="Junio">Junio</option>
+                            <option value="Julio">Julio</option>
+                            <option value="Agosto">Agosto</option>
+                            <option value="Septiembre">Septiembre</option>
+                            <option value="Octubre">Octubre</option>
+                            <option value="Noviembre">Noviembre</option>
+                            <option value="Diciembre">Diciembre</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="año" class="col-form-label">Año:</label>
+                        <input type="text" class="form-control" id="año" name="año" value="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="monto" class="col-form-label">Monto $:</label>
+                        <input type="text" class="form-control" id="monto" name="monto">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnPagar">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal de-->
+<div class="modal fade" id="modalHistorialPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-xl " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info">Pagos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <table id="pagos" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col-2">Mes</th>
+                                    <th scope="col-2">Pagado</th>
+                                    <th scope="col-2">Monto</th>
+                                    <th scope="col-2">Debe</th>
+                                    <th scope="col-2">Fecha de pago</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </section>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper.js (si es necesario) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <!-- sweetalert JS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- DataTables JS -->
+
+    <!--JavaScript propio-->
+    <script src="{% static 'js/Clientes.js' %}"></script>
+    </body>
+
+    </html>
+    {% endblock %}

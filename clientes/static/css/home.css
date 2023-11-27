@@ -1,0 +1,59 @@
+.bg-container {
+    background-color: #f5f1f1 !important;
+    /* Cambia el color de fondo según tus preferencias */
+    /* Puedes agregar más estilos si es necesario */
+}
+
+.circle-container {
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    width: 125px;
+    height: 125px;
+    background-color: transparent;
+    border: 10px solid #ccc;
+    border-top-color: var(--primary-color);
+    /* Define tu color de progreso aquí */
+    border-radius: 50%;
+    animation: progress-animation 2s linear forwards;
+}
+
+.percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@keyframes progress-animation {
+    to {
+        transform: rotate(0);
+    }
+}
+
+.cards-map {
+    background: #ccc;
+    margin-top: 20px;
+    /* Ajusta el margen superior según sea necesario */
+    padding: 20px;
+    /* Añade un relleno para mayor espacio alrededor del mapa */
+    border: 1px solid var(--primary-color);
+    /* Añade un borde para separar el mapa del resto de la página */
+    border-radius: 8px;
+    /* Ajusta la esquina redondeada según sea necesario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Agrega una sombra suave */
+}
+
+#map {
+    height: 400px;
+    /* Ajusta la altura según tus necesidades */
+    width: 100%;
+    /* Haz que el mapa ocupe el 100% del ancho del contenedor */
+    border-radius: 8px;
+    /* Ajusta la esquina redondeada según sea necesario */
+}

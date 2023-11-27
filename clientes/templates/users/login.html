@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/Login.css' %}">
+    <title>Conex God</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form method="post" class="sign-in-form">
+                    {% csrf_token %}
+                    <h2 class="title">Bienvenido Usuario</h2>
+                    <h2 class="title">Iniciar Sesión</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        {{ form.username }}
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        {{ form.password }}
+                    </div>
+                    {% if form.non_field_errors %}
+                    <div style="color: #eb4444; font-size: 16px; font-family: 'Roboto', sans-serif; padding-top: 8px;">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <br>
+                    <input type="submit" value="Ingresar" class="btn solid" />
+                </form>
+
+            </div>
+        </div>
+        <div class="circle-image">
+            <img class="Logo" src="{% static 'css/Imagen/Logo.png' %}" alt="Logo">
+        </div>
+    </div>
+    </div>
+</body>
+</html>

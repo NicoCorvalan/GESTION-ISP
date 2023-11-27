@@ -1,0 +1,9 @@
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+.bg-container {
+    background-color: #f5f1f1 !important;
+    /* Cambia el color de fondo según tus preferencias */
+    /* Puedes agregar más estilos si es necesario */
+}

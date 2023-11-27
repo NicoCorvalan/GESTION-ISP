@@ -1,0 +1,24 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" id="form-edicion-id" name="form-edicion-id" value="">
+    {% for campo in formulario %}
+    <div class="mb-3">
+        <label for="{{ campo.name }}" class="form-label">{{ campo.label }}</label>
+
+        {% if campo.field.widget.input_type == 'select' %}
+        <select class="form-select" id="{{ campo.name }}" name="{{ campo.name }}">
+            <option value="">Seleccionar</option>
+            {% for option in campo.field.choices %}
+            <option value="{{ option.0 }}">{{ option.1 }}</option>
+            {% endfor %}
+        </select>
+        {% elif campo.field.widget.input_type == 'date' %} <!-- Agregado: Verificar si es un campo de fecha -->
+        <input type="date" class="form-control" id="{{ campo.name }}" name="{{ campo.name }}"
+            value="{{ cliente.fecha_alta|date:'Y-m-d' }}">
+        {% else %}
+        <input type="{{ campo.field.widget.input_type }}" class="form-control" id="{{ campo.name }}"
+            name="{{ campo.name }}" value="{{ cliente.some_field }}">
+        {% endif %}
+    </div>
+    {% endfor %}
+</form>

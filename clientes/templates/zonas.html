@@ -1,0 +1,120 @@
+{% extends "sidebar/sidebar.html" %}
+{% load static %}
+{% block title %}Zonas{% endblock %}
+{% block title_1 %}
+<i class='bx bxs-user check icon'></i>
+<span class="text nav-text p-1">Zonas</span>
+{% endblock %}
+{% block content %}
+
+<div class="container p-5 bg-container container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <button id="btnNuevaZona" type="button" class="btn btn-outline-success my-3">Nueva Zona</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="Zonas" class="table table-bordered table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Nombre</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaZonas">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para Nueva Zona -->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #28a745; color: white;">
+                <h5 class="modal-title">Nueva Zona</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formZonas" method="post">
+                    {% csrf_token %}
+                    {{ form_zonas.as_p }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para edición de Zonas -->
+<div class="modal fade" id="modalEdicionZona" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Zona</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formEdicionZona" method="post">
+                {% csrf_token %}
+                <input type="hidden" id="form-edicion-id" name="id" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="latitud">Latitud:</label>
+                        <input type="text" class="form-control" id="latitud" name="latitud" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="longitud">Longitud:</label>
+                        <input type="text" class="form-control" id="longitud" name="longitud" required />
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="btnGuardarEdicionZona" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper.js (si es necesario) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+<!-- sweetalert JS -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<!--JavaScript propio-->
+<script src="{% static 'js/zonas.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}
