@@ -1,0 +1,213 @@
+/* div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+} */
+.modal-custom {
+    max-width: 50%;
+    margin: auto;
+}
+
+/* ------------------------------------------------------------------------------ */
+.dark #modal-info {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+/* Estilos del título del modal de información en modo oscuro */
+.dark  .modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: #ccc;
+}
+
+/* Estilos del cuerpo del modal de información en modo oscuro */
+.dark #modal-info .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    /* Cambiar el color del texto del cuerpo */
+    color: var(--text-color);
+}
+/* Estilos del pie del modal de información en modo oscuro */
+.dark #modal-info .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+/* -------------------------------------------------------------------------------- */
+.dark #modalHistorialPagos {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+
+.dark  .modal-header{
+    background-color: var(--body-color);
+}
+
+/* Estilos del cuerpo del modal de pagos en modo oscuro */
+.dark #modalHistorialPagos .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--body-color);
+    /* Cambiar el color del texto del cuerpo */
+    color: var(--text-color);
+}
+
+/* Estilos personalizados para las celdas de la tabla en el modal de pagos */
+#pagos .text-center {
+    background-color: var(--body-color); /* Reemplaza "your_color" por el color deseado */
+    color: var(--text-color); /* Reemplaza "your_text_color" por el color del texto deseado */
+}
+
+/* Estilos del pie del modal de pagos en modo oscuro */
+.dark #modalHistorialPagos .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+
+/* -------------------------------------------------------------------------------- */
+
+/* Estilos de los botones de paginación */
+#pagination {
+    margin-top: 10px; /* Espacio superior para separar del contenido */
+    display: flex;
+    justify-content: center; /* Alinear horizontalmente los botones */
+}
+
+#pagination .page-link {
+    margin: 0 5px; /* Espacio entre botones */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde del botón */
+    background-color: #fff; /* Color de fondo del botón */
+    cursor: pointer;
+}
+
+/* Estilos de los botones del paginador en modo oscuro */
+.dark #pagination .page-link {
+    /* Cambiar el color de fondo y el borde de los botones */
+    background-color: #333;
+    border-color: #555;
+    /* Cambiar el color del texto de los botones */
+    color: #ccc;
+}
+
+/* -------------------------------------------------------------------------------- */
+.dark #modal-edicion-crud {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+/* Estilos del título del modal de edición en modo oscuro */
+.dark  .modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de edición en modo oscuro */
+.dark #modal-edicion-crud .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    /* Cambiar el color del texto del cuerpo */
+    color: var(--text-color);
+}
+
+/* Estilos del pie del modal de edición en modo oscuro */
+.dark #modal-edicion-crud .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+
+/* -------------------------------------------------------------------------------- */
+
+/* Estilos del modal de pago en modo oscuro */
+.dark #modalPago {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+/* Estilos del título del modal de pago en modo oscuro */
+.dark #modalPago.modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de pago en modo oscuro */
+.dark #modalPago .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    /* Cambiar el color del texto del cuerpo */
+    color: var(--text-color);
+}
+
+/* Estilos del pie del modal de pago en modo oscuro */
+.dark #modalPago .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+
+/* -------------------------------------------------------------------------------- */
+
+.dark #modalCRUD {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+
+/* Estilos del título del modal de CRUD en modo oscuro */
+.dark #modalCRUD .modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de CRUD en modo oscuro */
+.dark #modalCRUD .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    /* Cambiar el color del texto del cuerpo */
+    color: var(--text-color);
+}
+
+/* Estilos del pie del modal de CRUD en modo oscuro */
+.dark #modalCRUD .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+
+/* -------------------------------------------------------------------------------- */
+
+/* Estilos del modal de generación de deuda en modo oscuro */
+/* Estilos del modal de generación de deuda en modo oscuro */
+.dark #deudaModal {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+
+
+/* Estilos del título del modal de generación de deuda en modo oscuro */
+.dark #deudaModal .modal-title {
+    /* Cambiar el color del texto del título */
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de generación de deuda en modo oscuro */
+.dark #deudaModal .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    /* Cambiar el color del texto del cuerpo */
+    color: var(--text-color);
+}
+
+/* Estilos del pie del modal de generación de deuda en modo oscuro */
+.dark #deudaModal .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+

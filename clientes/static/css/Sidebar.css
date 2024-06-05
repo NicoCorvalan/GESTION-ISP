@@ -1,0 +1,507 @@
+/* Google Font Import - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Variables CSS */
+:root {
+    /* Definición de colores y transiciones */
+    --body-color: #f5f1f1;
+    --sidebar-color: #ffffff;
+    --primary-color: rgba(11, 35, 97, 1);
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+
+/* Estilos del cuerpo */
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+/* Estilos de selección de texto */
+::selection {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Estilos del cuerpo en modo oscuro */
+body.dark {
+    /* Cambio de variables de colores para el modo oscuro */
+    --body-color: #18191a;
+    --sidebar-color: #242526;
+    --primary-color: #49a9f3;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #fff;
+    --text-color: #ccc;
+}
+
+/* Estilos del sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;
+}
+
+/* Estilos del sidebar cuando está cerrado */
+.sidebar.close {
+    width: 88px;
+}
+
+/* Estilos comunes para elementos de la lista del sidebar */
+.sidebar li {
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Estilos del encabezado del sidebar y elementos relacionados */
+.sidebar header .image,
+.sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+/* Estilos comunes para iconos y texto del sidebar */
+.sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Estilos del texto del sidebar y sus transiciones */
+.sidebar .text,
+.sidebar .icon {
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+/* Estilos del texto del sidebar */
+.sidebar .text {
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+/* Estilos del texto del sidebar cuando está cerrado */
+.sidebar.close .text {
+    opacity: 0;
+}
+
+/* Estilos del encabezado del sidebar */
+.sidebar header {
+    position: relative;
+}
+
+/* Estilos de la imagen y texto del encabezado del sidebar */
+.sidebar header .image-text {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos del texto y profesión en el logo del encabezado del sidebar */
+.sidebar header .logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos del nombre en el logo del encabezado del sidebar */
+header .image-text .name {
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Estilos de la profesión en el logo del encabezado del sidebar */
+header .image-text .profession {
+    font-size: 12px;
+    margin-top: -2px;
+    display: block;
+}
+
+/* Estilos de la imagen en el encabezado del sidebar */
+.sidebar header .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos de la imagen en el encabezado del sidebar */
+.sidebar header .image img {
+    width: 40px;
+    border-radius: 6px;
+}
+
+/* Estilos del botón de alternar en el encabezado del sidebar */
+.sidebar header .toggle {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+/* Estilos del botón de alternar en modo oscuro */
+body.dark .sidebar header .toggle {
+    color: var(--text-color);
+}
+
+/* Estilos del botón de alternar cuando el sidebar está cerrado */
+.sidebar.close .toggle {
+    transform: translateY(-50%) rotate(0deg);
+}
+
+/* Estilos del menú dentro del sidebar */
+.sidebar .menu {
+    margin-top: 5px;
+}
+
+/* Estilos de enlaces en el menú del sidebar */
+.sidebar li a {
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+/* Estilos de enlaces en el menú del sidebar al pasar el ratón */
+.sidebar li a:hover {
+    background-color: var(--primary-color);
+}
+
+/* Estilos de iconos y texto en enlaces del sidebar al pasar el ratón */
+.sidebar li a:hover .icon,
+.sidebar li a:hover .text {
+    color: var(--sidebar-color);
+}
+
+/* Estilos de iconos y texto en enlaces del sidebar en modo oscuro al pasar el ratón */
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+    color: var(--text-color);
+}
+
+/* Estilos del menú en el sidebar */
+.sidebar .menu-bar {
+    height: calc(100% - 45px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+/* Estilos de la barra de desplazamiento en el menú del sidebar */
+.menu-bar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Estilos del modo claro/oscuro en el menú del sidebar */
+.sidebar .menu-bar .mode {
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+/* Estilos del icono sol/luna en el menú del sidebar */
+.menu-bar .mode .sun-moon {
+    height: 20px;
+    width: 40px;
+    margin-left: 20px;
+}
+
+/* Estilos del interruptor en el menú del sidebar */
+.menu-bar .bottom-content .toggle-switch {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Estilos del interruptor deslizante en el menú del sidebar */
+.toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+/* Estilos del círculo del interruptor deslizante */
+.switch::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
+
+/* Estilos del círculo del interruptor deslizante en modo oscuro */
+body.dark .switch::before {
+    left: 20px;
+}
+
+/* Estilos de la sección de usuario */
+.usuario {
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
+
+/* Estilos del texto en la sección de usuario */
+.usuario .text {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+}
+
+/* Estilos de la sección de usuario cuando el sidebar está cerrado */
+.sidebar.close~.usuario {
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+
+/* Estilos del texto en la sección de usuario en modo oscuro */
+body.dark .usuario .text {
+    color: var(--text-color);
+}
+
+/* Estilos del perfil de usuario */
+.usuario .usario-perfil {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: var(--sidebar-color);
+    border-bottom: 1px solid #ccc;
+}
+
+/* Estilos de la foto de perfil en el perfil de usuario */
+.usuario .usario-perfil .foto-perfil {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Estilos del nombre de usuario en el perfil de usuario */
+.usuario .usario-perfil .username {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Estilos del botón "Nuevo" */
+.usuario .boton-nuevo {
+    background: var(--sidebar-color);
+    padding: 20px;
+}
+
+/* Estilos del botón "Nuevo" al pasar el ratón */
+.usuario .boton-nuevo .btn-nuevo {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color var(--tran-03);
+}
+
+/* Estilos del botón "Nuevo" al pasar el ratón en modo oscuro */
+.usuario .boton-nuevo .btn-nuevo:hover {
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+}
+
+/* Estilos del botón "Nuevo" sin contorno */
+.usuario .boton-nuevo .btn-nuevo {
+    outline: none;
+}
+
+/* Estilos para listas y enlaces en el sidebar */
+.sidebar ol,
+.sidebar ul,
+.sidebar li.nav-link {
+    padding-left: 0;
+}
+
+/* Estilos para la tabla */
+.usuario .container-fluid {
+    background-color: var(--body-color)!important;
+}
+
+.tabla{
+    background-color: var(--body-color);
+}
+
+
+/* Estilos de las tarjetas en la sección de usuario */
+.usuario .card {
+    background: var(--sidebar-color);
+}
+
+.usuario .card th {
+    text-align: left !important;
+}
+
+.dark .usuario .card-body {
+    background-color: var(--sidebar-color);
+}
+
+
+/* Estilos de las tarjetas en modo oscuro */
+.dark .usuario .card {
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-color: var(--sidebar-color);
+    
+}
+
+
+.dark .usuario .card tbody td {
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+
+.dark .usuario .card th {
+    background-color: var(--body-color);
+    color: var(--text-color);
+    text-align: left;
+}
+
+#Clientes td {
+    text-align: left; /* Alinea los datos a la derecha */
+}
+#Servicios td {
+    text-align: left; /* Alinea los datos a la derecha */
+}
+#ClientesAlDia td{
+    text-align: left;
+}
+#ClientesDeudas td{
+    text-align: left;
+}
+#Zonas td{
+    text-align: left;
+}
+
+/* Estilos de las tarjetas en la sección de resumen */
+.title {
+    text-align: center;
+}
+
+/* Estilos de las tarjetas individuales */
+.cards {
+    background-color: var(--sidebar-color);
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    min-height: 200px;
+    transition: var(--tran-03);
+    color: var(--text-color);
+}
+
+/* Estilos de texto no subrayado en las tarjetas */
+.cards .no-underline {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.cards:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color) !important;
+    transition: background-color 0.3s ease !important;
+    color: var(--sidebar-color);
+}
+
+/*Modo oscuro de las cards*/
+body.dark .overview {
+    background-color: #333;
+    /* Puedes ajustar el color de fondo para el modo oscuro según tus preferencias */
+    color: #FFF;
+    /* También puedes ajustar el color del texto para que sea legible en el modo oscuro */
+}
+
+.cards.dark {
+    background-color: #242526;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cards.dark:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    background-color: #559be2 !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.icons{
+    font-size: 26px;
+    color: var(--text-color);
+}
+
+.dark .icons{
+    font-size: 26px;
+    color: var(--text-color);
+}

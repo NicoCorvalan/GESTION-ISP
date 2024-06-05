@@ -1,7 +1,5 @@
 .bg-container {
-    background-color: #f5f1f1 !important;
-    /* Cambia el color de fondo según tus preferencias */
-    /* Puedes agregar más estilos si es necesario */
+    background-color: var(--body-color)!important;
 }
 
 .circle-container {
@@ -36,12 +34,12 @@
 }
 
 .cards-map {
-    background: #ccc;
+    background: var(--primary-color);
     margin-top: 20px;
     /* Ajusta el margen superior según sea necesario */
-    padding: 20px;
+    padding: 2px;
     /* Añade un relleno para mayor espacio alrededor del mapa */
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--body-color);
     /* Añade un borde para separar el mapa del resto de la página */
     border-radius: 8px;
     /* Ajusta la esquina redondeada según sea necesario */

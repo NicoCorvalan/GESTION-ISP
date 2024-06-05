@@ -1,19 +1,13 @@
 //alta con jquery
 $("#btnNuevo").click(function () {
     $("#formClientes").trigger("reset");
+    $(".modal-header").css("background-color", "#28a745");
+    $(".modal-header").css("color", "white");
     $(".modal-title").text("Nuevo Cliente");
     $("#btnSubmit").text("Guardar");
     $("#formClientes").attr("data-action", "guardar");
     $("#modalCRUD").modal("show");
 });
-
-$("#btnGenerarDeuda").click(function () {
-    $(".modal-header").css("background-color", "blue");
-    $(".modal-header").css("color", "white");
-    $(".modal-title").text("Generar deuda");
-    $("#deudaModal").modal("show");
-});
-
 
 $(document).ready(function () {
     $("#formClientes").on("submit", function (event) {
@@ -287,7 +281,7 @@ const initDataTable = async () => {
     await clientes();
 
     // Inicializar el DataTable en el elemento #tablaClientes
-    dataTable = $('#Clientes').DataTable({
+    dataTable = $('#ClientesAlDia').DataTable({
         scrollX: true,
         // botones editar y eliminar en la tabla
         "columnDefs": [{
@@ -321,7 +315,7 @@ const initDataTable = async () => {
 
 const clientes = async () => {
     try {
-        const response = await fetch('/cargar_clientes/');
+        const response = await fetch('/clientes_aldia/');
         const data = await response.json()
         console.log(data)
         let contenido = ''
@@ -336,7 +330,7 @@ const clientes = async () => {
             </tr>
             `;
         });
-        tablaClientes.innerHTML = contenido;
+        tablaClientesDia.innerHTML = contenido;
     } catch (ex) {
         alert(ex);
     }
@@ -345,40 +339,9 @@ window.addEventListener('load', async () => {
     await initDataTable();
 });
 
-//generar deuda
-$(document).ready(function () {
-    $('#generarDeuda').click(function () {
-        var mesDeuda = $('#id_mes_deuda').val();
-        var añoDeuda = $('#id_año_deuda').val();
-        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-        $.ajax({
-            type: 'POST',
-            url: '/generar_deuda/',
-            data: {
-                'mes_deuda': mesDeuda,
-                'año_deuda': añoDeuda,
-                'csrfmiddlewaretoken': csrfToken
-            },
-            dataType: 'json',
-            success: function (response) {
-                console.log('Deuda generada exitosamente.');
-                Swal.fire(
-                    'Perfecto!',
-                    response.success,
-                    'success'
-                )
-                $("#deudaModal").modal("hide")
-            },
-            error: function (data) {
-                console.log('Error al procesar el formulario.');
-            }
-        });
-    });
-});
-
 const actualizarTabla = async () => {
     await clientes();
-    dataTable.clear().rows.add($("#Clientes tbody tr")).draw();
+    dataTable.clear().rows.add($("#ClientesAlDia tbody tr")).draw();
 }
 
 
@@ -390,7 +353,7 @@ $(document).on("click", ".btnRegistrarPago", function () {
     var apellido = fila.find('td:eq(3)').text();
 
     // Realiza la solicitud para cargar la información del cliente
-    fetch('/cargar_clientes/')
+    fetch('/clientes_aldia/')
         .then(response => response.json())
         .then(data => {
             // Encuentra el cliente en los datos cargados
@@ -438,12 +401,13 @@ $(document).on("click", ".btnRegistrarPago", function () {
                             response.message,
                             'success'
                         );
+                        actualizarTabla()
                     },
                     error: function (error) {
                         Swal.fire({
                             icon: "error",
                             title: "Oops...",
-                            text: error.responseJSON.error,
+                            text: "Algo salio mal",
                         });
                     }
                 });

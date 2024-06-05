@@ -97,3 +97,11 @@ class ClienteDeuda(models.Model):
     def __str__(self) -> str:
         return ("cliente:" + self.cliente.nombre)
 
+class Ticket(models.Model):
+    nombre = models.CharField(max_length=25)
+    dni = models.PositiveIntegerField()
+    email = models.EmailField()
+    problema = models.TextField()
+
+    def __str__(self):
+        return self.nombre

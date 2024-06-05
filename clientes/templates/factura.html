@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .factura {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .left {
+            text-align: left;
+            float: left;
+            width: 30%;
+        }
+        .right {
+            text-align: right;
+            float: right;
+            width: 30%;
+        }
+        p {
+            color: #555;
+            margin: 5px 0;
+        }
+        .total {
+            font-weight: bold;
+            color: rgb(184, 1, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="factura">
+        <h1>Factura</h1>
+        <div class="right"><p>Fecha de Emisión: {{ fecha_emision }}</p>
+            <p>Fecha de Vencimiento: {{ fecha_vencimiento }}</p></div>
+        <div class="left">
+            <p>Cliente: {{ cliente.apellido }} {{ cliente.nombre }}</p>
+        </div>
+        <div class="right"><p>Mes de la Deuda: {{ mes_deuda }}</p>
+            <p>Monto ${{ cliente.servicio.monto }}</p>
+        </div>
+        <div class="left"><p>Tipo de Servicio: {{ cliente.servicio.tipo_plan }}</p></div>
+        <div class="right">
+            <p>Registra deuda de mes anterior: ${{ total_debt }}</p>
+            <p class="total">Monto Total: ${{ total_monto }}</p>
+        </div>
+        <p>{{ additional_text }}</p>
+        <p>{{ additional_text2 }}</p>
+    </div>
+</body>
+
+</html>

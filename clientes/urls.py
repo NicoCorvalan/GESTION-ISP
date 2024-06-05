@@ -24,4 +24,12 @@ urlpatterns = [
     path('editar_zona/', views.editar_zona, name='editar_zona'),
     path('cargar_zona/<int:zona_id>/', views.cargar_zona, name='cargar_zona'),
     path('eliminar_zona/<int:zona_id>/', views.eliminar_zona, name='eliminar_zona'),
+    path('clientescondeudas/', views.clientes_deuda_render, name='cliente_deudas'),
+    path('clientes_deudores/', views.clientes_deudas, name='deudas'),
+    path('clientedia/', views.clientes_aldia_render, name='cliente_dia'),
+    path('clientes_aldia/', views.clientes_aldia, name='pagados'),
+    path('soporteTecnico/', views.soporteTecnico, name='soporteTecnico'),
+    path('tickets/', views.tickets, name='tickets'),
+    path('generar_factura_pdf/', views.generar_factura_pdf, name='generar_factura_pdf'),
+    #path('enviar_mensajes_whatsapp/', views.enviar_mensajes_whatsapp , name='enviar_mensajes_whatsapp'),
 ]

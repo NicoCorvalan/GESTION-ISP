@@ -1,12 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ClienteForm, DeudaForm, ServiciosForm, LoginForm, ZonasForm
+from .forms import ClienteForm, DeudaForm, ServiciosForm, LoginForm, ZonasForm, TicketsForm
 from .models import Servicio, Zona, Cliente, Deuda, ClienteDeuda
 from django.http.response import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from decimal import Decimal
-import datetime
+from datetime import datetime, timedelta
+from io import BytesIO
+from collections import defaultdict
+from django.http import HttpResponse
+from PyPDF2 import PdfReader, PdfWriter
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
+import os
+
 
 # Create your views here.
 
@@ -169,6 +177,10 @@ def generar_deuda(request):
         deuda.save()
         for cliente in clientes:
             if cliente.estado == "A":
+                deuda_anterior = cliente.clientedeuda_set.filter(pagado=False).first()
+                if deuda_anterior:
+                    deuda_anterior.monto += 100
+                    deuda_anterior.save()
                 cliente.deudas.add(
                     deuda, through_defaults={"monto": cliente.servicio.monto}
                 )
@@ -181,6 +193,7 @@ def generar_deuda(request):
 
 @csrf_exempt
 def registrar_pago(request):
+    import datetime
     if request.method == "POST":
         mes = request.POST.get("mes")
         año = request.POST.get("año")
@@ -204,7 +217,7 @@ def registrar_pago(request):
             response_data = {"error": "El monto ingresado es mayor al adeudado"}
             return JsonResponse(response_data, status=405)
 
-
+@login_required(login_url="login")
 def servicios(request):
     form_servicios = ServiciosForm()
     if request.method == "POST":
@@ -274,7 +287,7 @@ def editar_servicio(request, servicio_id):
     print(formulario.errors)
     return JsonResponse({"error": "Error al editar el servicio"})
 
-
+@login_required(login_url="login")
 def zonas(request):
     form_zonas = ZonasForm()
 
@@ -346,3 +359,219 @@ def cargar_zona(request, zona_id):
     }
 
     return JsonResponse(zona_data)
+
+@login_required(login_url="login")
+def clientes_deuda_render(request):
+    form_deuda = DeudaForm(request.POST or None)
+    formulario = ClienteForm(request.POST or None)
+    servicios = Servicio.objects.all()
+    zonas = Zona.objects.all()
+    contexto = {
+        "formulario": formulario,
+        "servicios": servicios,
+        "zonas": zonas,
+        "form_deuda": form_deuda,}
+    return render(request, 'clientedeuda.html', contexto )
+
+
+def clientes_deudas(request):
+    clientes = Cliente.objects.all()
+    data = []
+    for cliente in clientes:
+        deudas_data = []
+        for cd in cliente.clientedeuda_set.filter(pagado=False):
+            deuda_info = {
+                "mes_deuda": cd.deuda.mes_deuda,
+                "año_deuda": cd.deuda.año_deuda,
+                "fecha_pago": cd.fecha_pago,
+                "monto_pagado": cd.monto_pagado,
+                "pagado": cd.pagado,
+                "monto": cd.monto,
+            }
+            deudas_data.append(deuda_info)
+        if deudas_data:
+            cliente_data = {
+                "id": cliente.id, # type: ignore
+                "dni": cliente.dni,
+                "apellido": cliente.apellido,
+                "nombre": cliente.nombre,
+                "direccion": cliente.direccion,
+                "telefono": cliente.telefono,
+                "estado": cliente.estado,
+                "router": cliente.router,
+                "n_serie": cliente.n_serie,
+                "observaciones": cliente.observaciones,
+                "fecha_alta": cliente.fecha_alta,
+                "servicio__tipo_plan": cliente.servicio.tipo_plan,
+                "servicio__monto": cliente.servicio.monto,
+                "zona__nombre": cliente.zona.nombre,
+                "deudas": deudas_data,
+            }
+            data.append(cliente_data)
+
+    return JsonResponse({"clientes": data})
+
+@login_required(login_url="login")
+def clientes_aldia_render(request):
+    form_deuda = DeudaForm(request.POST or None)
+    formulario = ClienteForm(request.POST or None)
+    servicios = Servicio.objects.all()
+    zonas = Zona.objects.all()
+    contexto = {
+        "formulario": formulario,
+        "servicios": servicios,
+        "zonas": zonas,
+        "form_deuda": form_deuda,}
+    return render(request, 'clienteAlDia.html', contexto )
+
+
+def clientes_aldia(request):
+    clientes = Cliente.objects.all()
+    data = []
+
+    for cliente in clientes:
+        todas_pagadas = cliente.clientedeuda_set.exists() and \
+                        cliente.clientedeuda_set.filter(pagado=True).count() == cliente.clientedeuda_set.count()
+
+        if todas_pagadas:
+            deudas_data = [
+                {
+                    "mes_deuda": cd.deuda.mes_deuda,
+                    "año_deuda": cd.deuda.año_deuda,
+                    "fecha_pago": cd.fecha_pago,
+                    "monto_pagado": cd.monto_pagado,
+                    "pagado": cd.pagado,
+                    "monto": cd.monto,
+                }
+                for cd in cliente.clientedeuda_set.filter(pagado=True)
+            ]
+
+            cliente_data = {
+                "id": cliente.id,  # type: ignore
+                "dni": cliente.dni,
+                "apellido": cliente.apellido,
+                "nombre": cliente.nombre,
+                "direccion": cliente.direccion,
+                "telefono": cliente.telefono,
+                "estado": cliente.estado,
+                "router": cliente.router,
+                "n_serie": cliente.n_serie,
+                "observaciones": cliente.observaciones,
+                "fecha_alta": cliente.fecha_alta,
+                "servicio__tipo_plan": cliente.servicio.tipo_plan,
+                "servicio__monto": cliente.servicio.monto,
+                "zona__nombre": cliente.zona.nombre,
+                "deudas": deudas_data,
+            }
+
+            data.append(cliente_data)
+
+    return JsonResponse({"clientes": data})
+
+def soporteTecnico(request):
+
+    return render(request, "soporteTecnico.html")
+
+def tickets(request):
+    if request.method == 'POST':
+        form = TicketsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tickets')
+    else:
+        form = TicketsForm()
+
+    return render(request, "tickets.html", {'form': form})
+
+
+def generar_factura_pdf(request):
+    clientes_deuda = ClienteDeuda.objects.filter(pagado=False)
+    clientes = defaultdict(list)
+    pdf_buffer = BytesIO()
+
+    # Fecha de emisión (fecha actual)
+    fecha_emision = datetime.now().strftime("%d/%m/%Y")
+    
+    for cliente_deuda in clientes_deuda:
+        cliente = cliente_deuda.cliente
+        deuda = cliente_deuda.deuda
+        monto = cliente_deuda.monto
+        clientes[cliente].append((deuda, monto))
+
+    # Generamos el contenido del PDF
+    html_content = ""
+    for cliente, cliente_deudas in clientes.items():
+        mes_deuda = cliente_deudas[0][0].mes_deuda
+        total_debt = sum(monto for _, monto in cliente_deudas) - cliente.servicio.monto
+        total_monto = sum(monto for _, monto in cliente_deudas)
+        additional_text = "Si abona fuera de término deberá abonar $100 de recargo."
+        additional_text2 = "Estimados clientes, nos comunicamos con usted para informarle que, luego de los acontecimientos de público conocimiento, nos vemos en la obligación de aplicar una actualización en los precios de los abonados actuales. Dicho ajuste se debe a la necesidad de afrontar los aumentos de costos, tanto en pesos como en dólares."
+        
+        # Calcular fecha de vencimiento (1 mes después de la fecha de emisión)
+        fecha_emision_dt = datetime.strptime(fecha_emision, "%d/%m/%Y")
+        fecha_vencimiento_dt = fecha_emision_dt + timedelta(days=30)
+        fecha_vencimiento = fecha_vencimiento_dt.strftime("%d/%m/%Y")
+
+        # Renderizamos la plantilla HTML con los datos del cliente y su deuda
+        factura_html = render_to_string('factura.html', {
+            'cliente': cliente,
+            'fecha_emision': fecha_emision,
+            'fecha_vencimiento': fecha_vencimiento,
+            'mes_deuda': mes_deuda,
+            'total_debt': total_debt,
+            'total_monto': total_monto,
+            'additional_text': additional_text,
+            'additional_text2': additional_text2,
+        })
+        
+        html_content += factura_html
+        html_content += '<div style="page-break-after:always;"></div>'  # Agregar un salto de página
+
+    # Generamos el PDF a partir del contenido HTML
+    generar_pdf(pdf_buffer, html_content)
+
+    # Configuramos la respuesta HTTP con el contenido del PDF
+    response = HttpResponse(pdf_buffer.getvalue(), content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="facturas.pdf"'
+
+    # Mover el archivo PDF a la carpeta deseada
+    path = 'C:/Users/Nico/Desktop/Facturas'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    
+    # Guardar el PDF principal
+    main_pdf_path = os.path.join(path, 'facturas.pdf')
+    with open(main_pdf_path, 'wb') as f:
+        f.write(pdf_buffer.getvalue())
+
+    # Dividir el PDF y guardar los PDFs individuales
+    pdf_buffer.seek(0)  # Reiniciar el puntero del buffer
+    dividir_pdf(pdf_buffer, path)
+
+    return response
+
+def generar_pdf(buffer, html_content):
+    pisa_status = pisa.CreatePDF(html_content, dest=buffer)
+    return pisa_status.err
+
+def dividir_pdf(buffer, output_dir):
+    # Obtener todos los clientes únicos de la lista de deudas
+    clientes_deuda = ClienteDeuda.objects.filter(pagado=False).values_list('cliente', flat=True).distinct()
+    input_pdf = PdfReader(buffer)
+    
+    # Iterar sobre cada cliente y asignarle una página del PDF
+    for i, cliente_id in enumerate(clientes_deuda):
+        if i < len(input_pdf.pages):
+            page = input_pdf.pages[i]
+            cliente = Cliente.objects.get(id=cliente_id)  # Obtener el objeto cliente
+            
+            output = PdfWriter()
+            output.add_page(page)
+            
+            # Guardar el PDF con el nombre del cliente y el número de página
+            with open(os.path.join(output_dir, f'{cliente.apellido}_{cliente.nombre}_{cliente.dni}_factura.pdf'), 'wb') as output_stream:
+                output.write(output_stream)
+
+
+
+#def enviar_mensajes_whatsapp(request):

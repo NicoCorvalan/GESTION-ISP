@@ -2,12 +2,12 @@
 {% load static %}
 {% block title %}Servicios{% endblock %}
 {% block title_1 %}
-<i class='bx bx-dollar icon'></i>
-<span class="text nav-text p-1">Planes</span>
+<div class="icons"><i class='bx bx-dollar icon'></i>
+    <span class="text nav-text p-1">Planes</span></div>
 {% endblock %}
 {% block content %}
 
-<div class="container my-3">
+<div class="container p-5 bg-container container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <button id="btnNuevoServicios" type="button" class="btn btn-outline-success my-3">Nuevo Servicio</button>
@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="Servicios" class="table table-bordered table-striped" style="width:100%">
+                        <table id="Servicios" class="table table-hover table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>IdServicio</th>
@@ -111,7 +111,7 @@
 <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-<script src="{% static 'js/servicios.js' %}"></script>
+<script src="{% static 'js/Servicios.js' %}"></script>
 </body>
 
 </html>

@@ -7,3 +7,53 @@ div.dataTables_wrapper {
     /* Cambia el color de fondo según tus preferencias */
     /* Puedes agregar más estilos si es necesario */
 }
+
+/* Estilos del modal de lista de zonas en modo oscuro */
+.dark #modalCRUD {
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px);
+}
+
+/* Estilos del título del modal de lista de zonas en modo oscuro */
+.dark #modalCRUD .modal-header {
+    /* Cambiar el color del texto del título */
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de lista de zonas en modo oscuro */
+.dark #modalCRUD .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+}
+
+/* Estilos del pie del modal de lista de zonas en modo oscuro */
+.dark #modalCRUD .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+/* Estilos del modal de edición de zona en modo oscuro */
+.dark #modalEdicionZona {
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px);
+}
+
+/* Estilos del título del modal de edición de zona en modo oscuro */
+.dark #modalEdicionZona .modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de edición de zona en modo oscuro */
+.dark #modalEdicionZona .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+
+/* Estilos del pie del modal de edición de zona en modo oscuro */
+.dark #modalEdicionZona .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}

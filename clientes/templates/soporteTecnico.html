@@ -1,0 +1,32 @@
+{% extends "sidebar/sidebar.html" %}
+{% load static %}
+{% block title %}soporteTecnico{% endblock %}
+{% block title_1 %}
+<i class='bx bx-dollar icon'></i>
+<span class="text nav-text p-1">Soporte Tecnico</span>
+{% endblock %}
+{% block content %}
+
+
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper.js (si es necesario) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+<!-- sweetalert JS -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<!--JavaScript propio-->
+<script src="{% static 'js/soporteTecnico.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

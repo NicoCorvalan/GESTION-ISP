@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Deuda, Servicio, Zona
+from .models import Cliente, Deuda, Servicio, Zona, Ticket
 
 class ClienteForm(forms.ModelForm):
     class Meta:
@@ -63,3 +63,8 @@ class ZonasForm(forms.ModelForm):
         super(ZonasForm, self).__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs.update({"class": "form-control"})
+
+class TicketsForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ['nombre', 'dni', 'email', 'problema']

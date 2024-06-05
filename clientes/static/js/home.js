@@ -1,12 +1,3 @@
-// Realizar la petición HTTP para obtener la cantidad total de clientes
-fetch("http://127.0.0.1:5000/cardClientes")
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("clientesTotal").innerText = data[0][0];
-    })
-    .catch(error => console.error(error));
-
-// Supongamos que tienes una lista de zonas con latitud y longitud
 const zonas = [];
 
 function cargar_zonas() {
@@ -36,6 +27,5 @@ function mostrarZonasEnMapa() {
     });
 }
 
-// Llama a la función para cargar las zonas al inicio
 cargar_zonas();
 

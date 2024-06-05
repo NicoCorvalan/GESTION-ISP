@@ -1,7 +1,6 @@
 $("#btnNuevaZona").click(function () {
     $("#formZonas").trigger("reset");
-    $(".modal-header").css("background-color", "#28a745");
-    $(".modal-header").css("color", "white");
+    $(".modal-header");
     $(".modal-title").text("Nueva Zona");
     $("#btnSubmit").text("Guardar");
     $("#formZonas").attr("data-action", "guardar");
@@ -47,7 +46,7 @@ const initDataTable = async () => {
 
 const zonas = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/cargar_zonas/');
+        const response = await fetch('/cargar_zonas/');
         const data = await response.json();
         console.log(data);
 
@@ -117,7 +116,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:8000/zonas/",
+            url: "/zonas/",
             data: $(this).serialize(),
             success: function (response) {
                 Swal.fire(
@@ -142,7 +141,7 @@ $(document).ready(function () {
 
 const eliminarZona = async (zonaId) => {
     try {
-        const url = `http://127.0.0.1:8000/eliminar_zona/${zonaId}/`; // URL de eliminación
+        const url = `/eliminar_zona/${zonaId}/`; // URL de eliminación
         const csrfToken = $('[name=csrfmiddlewaretoken]').val(); // Obtener el token CSRF del formulario
 
         const response = await fetch(url, {
@@ -182,7 +181,7 @@ window.addEventListener('load', async () => {
 
 const cargarDatosZona = async (zonaId) => {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/cargar_zona/${zonaId}/`);
+        const response = await fetch(`/cargar_zona/${zonaId}/`);
 
         const zona = await response.json();
 
@@ -207,7 +206,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:8000/editar_zona/", // Ajusta la URL según tu configuración
+            url: "/editar_zona/", // Ajusta la URL según tu configuración
             data: $(this).serialize(),
             success: function (response) {
                 console.log(response);

@@ -7,3 +7,69 @@ div.dataTables_wrapper {
     /* Cambia el color de fondo según tus preferencias */
     /* Puedes agregar más estilos si es necesario */
 }
+
+/* Estilos de la tabla en modo oscuro */
+.dark #Servicios {
+    /* Cambiar el color de fondo de la tabla */
+    background-color: var(--body-color);
+    /* Cambiar el color del texto de la tabla */
+    color: var(--text-color);
+}
+
+
+
+
+/* Estilos del modal de nuevo servicio en modo oscuro */
+.dark #modalNuevoServicio {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+
+/* Estilos del título del modal de nuevo servicio en modo oscuro */
+.dark #modalNuevoServicio .modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de nuevo servicio en modo oscuro */
+.dark #modalNuevoServicio .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+
+/* Estilos del pie del modal de nuevo servicio en modo oscuro */
+.dark #modalNuevoServicio .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}
+
+
+
+/* Estilos del modal de edición de servicio en modo oscuro */
+.dark #modalEdicionServicio {
+    /* Cambiar el color de fondo del modal */
+    background-color: rgba(36, 37, 38, 0.8); /* Color de fondo con opacidad */
+    backdrop-filter: blur(8px); /* Aplicar efecto de difuminado */
+}
+
+/* Estilos del título del modal de edición de servicio en modo oscuro */
+.dark #modalEdicionServicio .modal-header {
+    /* Cambiar el color del texto del título */
+    background-color: var(--body-color);
+    color: var(--text-color);
+}
+
+/* Estilos del cuerpo del modal de edición de servicio en modo oscuro */
+.dark #modalEdicionServicio .modal-body {
+    /* Cambiar el color de fondo del cuerpo */
+    background-color: var(--sidebar-color);
+}
+
+/* Estilos del pie del modal de edición de servicio en modo oscuro */
+.dark #modalEdicionServicio .modal-footer {
+    /* Cambiar el color de fondo del pie */
+    background-color: var(--body-color);
+}

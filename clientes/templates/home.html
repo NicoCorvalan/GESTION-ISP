@@ -2,8 +2,8 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 {% block title_1 %}
-<i class='bx bxs-home icon'></i>
-<span class="text nav-text p-1">Home</span>
+<div class="icons"><i class='bx bxs-home icon'></i>
+    <span class="text nav-text p-1">Home</span></div>
 {% endblock %}
 {% block content %}
 
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="card-enlace">
-                    <a href="{% url 'clientes' %}" class="no-underline">Ver mas</a>
+                    <a href="{% url 'cliente_deudas' %}" class="no-underline">Ver mas</a>
                 </div>
             </div>
         </div>
@@ -53,13 +53,12 @@
                     </div>
                 </div>
                 <div class="card-enlace">
-                    <a href="{% url 'clientes' %}" class="no-underline">Ver mas</a>
+                    <a href="{% url 'cliente_dia' %}" class="no-underline">Ver mas</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
+    <!-- Mapa Leaflet -->
     <div class="row">
         <div class="col">
             <div class="cards-map">
@@ -68,14 +67,12 @@
         </div>
     </div>
 </div>
-<!-- Mapa Leaflet -->
-
 
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{% static 'js/home.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/Home.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 
 </body>
 
