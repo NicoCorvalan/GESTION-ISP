@@ -44,6 +44,11 @@ Aquí están algunas imágenes de la aplicación en funcionamiento:
 
 ![Imagen 1](Imagenes/conexgod.png)
 ![Imagen 2](Imagenes/Home.png)
-![Imagen 3](Imagenes/Clientes.png)
-![Imagen 4](Imagenes/Clientes-Informacion_cliente.png)
+![Imagen 3](Imagenes/Home2.png)
+![Imagen 4](Imagenes/Clientes.png)
+![Imagen 5](Imagenes/Clientes-Informacion_cliente.png)
+![Imagen 6](Imagenes/Clientes-Pagos.png)
+![Imagen 7](Imagenes/Clientes-Registrar_Pago.png)
+![Imagen 8](Imagenes/Planes.png)
+![Imagen 9](Imagenes/Zonas.png)
 ---
