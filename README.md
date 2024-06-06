@@ -42,7 +42,7 @@ Para ejecutar la aplicación en un entorno local, primero asegúrate de tener Py
 
 Aquí están algunas imágenes de la aplicación en funcionamiento:
 
-![Imagen 1](img/conexgod.png)
-![Imagen 2](img/Home.png)
+![Imagen 1](Imgenes/conexgod.png)
+![Imagen 2](Imgenes/Home.png)
 
 ---
