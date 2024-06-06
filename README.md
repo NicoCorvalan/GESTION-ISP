@@ -38,8 +38,11 @@ Para ejecutar la aplicación en un entorno local, primero asegúrate de tener Py
 
 6. Abre tu navegador web y accede a `http://127.0.0.1:8000/` para ver la aplicación en funcionamiento.
 
-## Contribución
+## Imágenes de la app
 
-¡Estamos abiertos a contribuciones! Si deseas mejorar esta aplicación, siéntete libre de hacer un fork del repositorio, implementar tus cambios y enviar un pull request. También puedes informar sobre problemas o sugerir mejoras creando un issue en el repositorio.
+Aquí están algunas imágenes de la aplicación en funcionamiento:
+
+![Imagen 1](img/conexgod.bmp)
+![Imagen 2](img/Home.bmp)
 
 ---
